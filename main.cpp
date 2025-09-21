@@ -22,13 +22,15 @@ using namespace std;
 const float W = 1200;
 const float H =  900;
 
-void App() {
-    auto flags = ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoScrollbar;
-    ImGui::SetNextWindowSize(ImVec2(W, H));
-    ImGui::SetNextWindowPos(ImVec2(0.0f, 0.0f));
-    ImGui::Begin("Hello", nullptr, flags);
-    ImGui::End();
-}
+// App Interface
+struct App;
+void AppInit(App& app, float w, float h);
+void AppUpdateAndRender(App& app);
+
+// #include "hello.cpp"
+#include "fileexplorer.cpp"
+
+App app = {};
 
 int main(void)
 {
@@ -80,6 +82,7 @@ int main(void)
     ImGui_ImplGlfw_InitForOpenGL(window, true);
     ImGui_ImplOpenGL3_Init(glsl_version);
 
+    AppInit(app, W, H);
     while (!glfwWindowShouldClose(window))
     {
         /* Render here */
@@ -90,7 +93,7 @@ int main(void)
         ImGui_ImplGlfw_NewFrame();
         ImGui::NewFrame();
 
-        App();
+        AppUpdateAndRender(app);
 
         // Rendering
         ImGui::Render();
