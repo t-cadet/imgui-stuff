@@ -1,8 +1,8 @@
 run: main
 	LD_LIBRARY_PATH="." ./main
 	
-main: main.cpp hello.cpp fileexplorer.cpp imgui.so
-	clang++ -Iimgui -ggdb -std=c++20 -lglfw -lGL -lGLEW imgui.so main.cpp -o main
+main: src/main.cpp src/hello.cpp src/fileexplorer.cpp imgui.so
+	clang++ -I./imgui -I. -ggdb -std=c++20 -lglfw -lGL -lGLEW imgui.so src/main.cpp -o main
 
 imgui.so: imgui/*.cpp
 	clang++ -shared -Iimgui -ggdb -std=c++20 \

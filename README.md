@@ -1,4 +1,4 @@
-# ImGui stuff
+# ImGui Stuff
 
 Experiments related to ImGui
 
