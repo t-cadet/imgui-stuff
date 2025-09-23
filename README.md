@@ -20,3 +20,7 @@ https://github.com/franneck94/UdemyCppGui
 ### File Explorer
 
 ![Screenshot of the File Explorer UI](gallery/file_explorer.png)
+
+### Function Plotter
+
+![Screenshot of the Function Plotter UI](gallery/function_plotter.png)

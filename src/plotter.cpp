@@ -1,47 +1,55 @@
+#include <array>
 #include <cmath>
+#include <vector>
 
 #include "implot.h"
 
-struct App {
-  float w, h;
+enum FunctionId {
+  None = 0,
+  Sin,
+  Cos,
+  Sq,
 };
 
-template <typename T>
-inline T RandomRange(T min, T max) {
-    T scale = rand() / (T) RAND_MAX;
-    return min + scale * ( max - min );
-}
+struct FunctionPlot {
+  FunctionId id;
+  const char* label;
+  bool selected;
 
-void Demo_ShadedPlots() {
-    static float xs[1001], ys[1001], ys1[1001], ys2[1001], ys3[1001], ys4[1001];
-    srand(0);
-    for (int i = 0; i < 1001; ++i) {
-        xs[i]  = i * 0.001f;
-        ys[i]  = 0.25f + 0.25f * sinf(25 * xs[i]) * sinf(5 * xs[i]) + RandomRange(-0.01f, 0.01f);
-        ys1[i] = ys[i] + RandomRange(0.1f, 0.12f);
-        ys2[i] = ys[i] - RandomRange(0.1f, 0.12f);
-        ys3[i] = 0.75f + 0.2f * sinf(25 * xs[i]);
-        ys4[i] = 0.75f + 0.1f * cosf(25 * xs[i]);
-    }
-    static float alpha = 0.25f;
-    ImGui::DragFloat("Alpha",&alpha,0.01f,0,1);
+  vector<float> xs;
+  vector<float> ys;
 
-    if (ImPlot::BeginPlot("Shaded Plots")) {
-        ImPlot::PushStyleVar(ImPlotStyleVar_FillAlpha, alpha);
-        ImPlot::PlotShaded("Uncertain Data",xs,ys1,ys2,1001);
-        ImPlot::PlotLine("Uncertain Data", xs, ys, 1001);
-        ImPlot::PlotShaded("Overlapping",xs,ys3,ys4,1001);
-        ImPlot::PlotLine("Overlapping",xs,ys3,1001);
-        ImPlot::PlotLine("Overlapping",xs,ys4,1001);
-        ImPlot::PopStyleVar();
-        ImPlot::EndPlot();
+  void computePoints(float start, float end, size_t pointCount) {
+    xs.reserve(pointCount);
+    ys.reserve(pointCount);
+
+    float dist = (end - start) / ((float)pointCount - 1.0f);
+    for (size_t i = 0; i < pointCount; ++i) {
+      float x = start + i*dist;
+      xs.push_back(x);
+      switch (id) {
+        case Sin: ys.push_back(sin(x)); break;
+        case Cos: ys.push_back(cos(x)); break;
+        case Sq : ys.push_back(x*x); break;
+        default: break;
+      }
     }
-}
+  }
+};
+
+struct App {
+  float w, h;
+  array<FunctionPlot, 3> plots;
+};
 
 void AppInit(App& app, float w, float h) {
     app = {};
     app.w = w;
     app.h = h;
+
+    app.plots[0] = FunctionPlot { Sin, "sin(x)", false };
+    app.plots[1] = FunctionPlot { Cos, "cos(x)", false };
+    app.plots[2] = FunctionPlot { Sq , "sq(x)" , false };
 }
 
 void AppUpdateAndRender(App& app) {
@@ -50,7 +58,25 @@ void AppUpdateAndRender(App& app) {
     ImGui::SetNextWindowPos(ImVec2(0.0f, 0.0f));
     ImGui::Begin("Function Plotter", nullptr, flags);
 
-    Demo_ShadedPlots();
+    constexpr float start = -100.0;
+    constexpr float end = 100.0;
+    constexpr size_t POINT_COUNT = 10000;
+
+    for (auto& plot : app.plots) {
+      if (ImGui::Checkbox(plot.label, &plot.selected)) {
+        if (plot.xs.empty()) {
+          plot.computePoints(start, end, POINT_COUNT);
+        }
+      }
+    }
+
+    ImPlot::BeginPlot("###plot", ImVec2(-1.0f, -1.0f));
+    for (auto& plot : app.plots) {
+      if (plot.selected) {
+        ImPlot::PlotLine(plot.label, plot.xs.data(), plot.ys.data(), plot.xs.size());
+      }
+    }
+    ImPlot::EndPlot();
 
     ImGui::End();
 }
