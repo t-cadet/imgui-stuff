@@ -28,7 +28,8 @@ void AppInit(App& app, float w, float h);
 void AppUpdateAndRender(App& app);
 
 // #include "hello.cpp"
-#include "fileexplorer.cpp"
+// #include "fileexplorer.cpp"
+#include "plotter.cpp"
 
 App app = {};
 
@@ -66,6 +67,7 @@ int main(void)
     // Setup Dear ImGui context
     IMGUI_CHECKVERSION();
     ImGui::CreateContext();
+    ImPlot::CreateContext();
     ImGuiIO& io = ImGui::GetIO(); (void)io;
     io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;     // Enable Keyboard Controls
     io.ConfigFlags |= ImGuiConfigFlags_NavEnableGamepad;      // Enable Gamepad Controls
@@ -108,6 +110,7 @@ int main(void)
 
     ImGui_ImplOpenGL3_Shutdown();
     ImGui_ImplGlfw_Shutdown();
+    ImPlot::DestroyContext();
     ImGui::DestroyContext();
 
     glfwTerminate();
