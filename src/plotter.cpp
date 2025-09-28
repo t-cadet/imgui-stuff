@@ -20,6 +20,10 @@ struct FunctionPlot {
   vector<float> ys;
 
   void computePoints(float start, float end, size_t pointCount) {
+    if (id == None) return;
+
+    xs.clear(pointCount);
+    ys.clear(pointCount);
     xs.reserve(pointCount);
     ys.reserve(pointCount);
 

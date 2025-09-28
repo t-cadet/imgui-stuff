@@ -29,7 +29,8 @@ void AppUpdateAndRender(App& app);
 
 // #include "hello.cpp"
 // #include "fileexplorer.cpp"
-#include "plotter.cpp"
+// #include "plotter.cpp"
+#include "texteditor.cpp"
 
 App app = {};
 

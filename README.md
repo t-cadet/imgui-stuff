@@ -24,3 +24,7 @@ https://github.com/franneck94/UdemyCppGui
 ### Function Plotter
 
 ![Screenshot of the Function Plotter UI](gallery/function_plotter.png)
+
+### Text Editor
+
+![Screenshot of the Text Editor UI](gallery/texteditor.png)
