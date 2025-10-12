@@ -28,3 +28,7 @@ https://github.com/franneck94/UdemyCppGui
 ### Text Editor
 
 ![Screenshot of the Text Editor UI](gallery/texteditor.png)
+
+### File Differ
+
+![Screenshot of the Text Editor UI](gallery/filediffer.png)
