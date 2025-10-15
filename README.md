@@ -31,4 +31,8 @@ https://github.com/franneck94/UdemyCppGui
 
 ### File Differ
 
-![Screenshot of the Text Editor UI](gallery/filediffer.png)
+![Screenshot of the File Differ UI](gallery/filediffer.png)
+
+### Paint
+
+![Screenshot of the Paint UI](gallery/paint.png)

@@ -153,8 +153,8 @@ void DrawDiffView(App & app) {
       if (app.diffs.contains(i)) {
         char leftLabel[32] = {0};
         char rightLabel[32] = {0};
-        snprintf(&leftLabel[0], 32, "<##%zu", i);
-        snprintf(&rightLabel[0], 32, ">##%zu", i);
+        snprintf(&leftLabel[0], 31, "<##%zu", i);
+        snprintf(&rightLabel[0], 31, ">##%zu", i);
 
         if (i < app.rightLines.size()) {
           if (ImGui::Button(&leftLabel[0], buttonSize)) {
