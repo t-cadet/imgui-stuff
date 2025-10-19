@@ -32,7 +32,8 @@ void AppUpdateAndRender(App& app);
 // #include "plotter.cpp"
 // #include "texteditor.cpp"
 // #include "filediff.cpp"
-#include "paint.cpp"
+// #include "paint.cpp"
+#include "calendar.cpp"
 
 App app = {};
 

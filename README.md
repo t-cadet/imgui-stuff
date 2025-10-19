@@ -36,3 +36,7 @@ https://github.com/franneck94/UdemyCppGui
 ### Paint
 
 ![Screenshot of the Paint UI](gallery/paint.png)
+
+### Calendar
+
+![Screenshot of the Paint UI](gallery/calendar.png)
