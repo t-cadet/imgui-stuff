@@ -44,3 +44,7 @@ https://github.com/franneck94/UdemyCppGui
 ### Csv Tool
 
 ![Screenshot of the Paint UI](gallery/csvtool.png)
+
+### Clock
+
+![Screenshot of the Paint UI](gallery/clock.png)

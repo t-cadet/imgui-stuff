@@ -34,7 +34,8 @@ void AppUpdateAndRender(App& app);
 // #include "filediff.cpp"
 // #include "paint.cpp"
 // #include "calendar.cpp"
-#include "csvtool.cpp"
+// #include "csvtool.cpp"
+#include "clock.cpp"
 
 App app = {};
 
